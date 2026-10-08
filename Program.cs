@@ -20,7 +20,7 @@ public static class Program
         if (!File.Exists(ffmpeg)) { Console.WriteLine("Нет ffmpeg.exe рядом с программой"); Pause(); return; }
         if (!File.Exists(model)) { Console.WriteLine("Нет ggml-base.bin рядом с программой"); Pause(); return; }
 
-        // --- Меню ---
+        // Меню
         Console.WriteLine("=== Аудио/Видео → Текст ===\n");
         Console.WriteLine("1 - MP3");
         Console.WriteLine("2 - MP4");
@@ -34,15 +34,15 @@ public static class Program
         };
         if (ext == null) return;
 
-        // --- Выбор файлов через проводник ---
+        // Выбор файлов через проводник
         var files = SelectFiles(ext);
         if (files.Length == 0) { Console.WriteLine("Файлы не выбраны."); Pause(); return; }
 
-        // --- Загрузка модели ---
+        // Загрузка модели 
         Console.WriteLine("\nЗагрузка модели Whisper...");
         using var factory = WhisperFactory.FromPath(model);
 
-        // --- Обработка каждого файла ---
+        // Обработка каждого файла
         foreach (var file in files)
         {
             await ProcessFileAsync(factory, file, ffmpeg, outputDir);
@@ -52,9 +52,9 @@ public static class Program
         Pause();
     }
 
-    /// <summary>
+    
     /// Открывает системный проводник с фильтром по расширению.
-    /// </summary>
+    
     private static string[] SelectFiles(string ext)
     {
         string ps = $@"Add-Type -AssemblyName System.Windows.Forms
@@ -82,9 +82,9 @@ if ($d.ShowDialog() -eq 'OK') {{ $d.FileNames | ForEach-Object {{ Write-Output $
             .ToArray();
     }
 
-    /// <summary>
+    
     /// Конвертация ffmpeg → WAV → транскрипция → сохранение .txt
-    /// </summary>
+    
     private static async Task ProcessFileAsync(
         WhisperFactory factory, string inputFile, string ffmpeg, string outputDir)
     {
@@ -110,7 +110,7 @@ if ($d.ShowDialog() -eq 'OK') {{ $d.FileNames | ForEach-Object {{ Write-Output $
                 return;
             }
 
-            // 2. Транскрипция
+            // 2 Транскрипция
             Console.WriteLine("Расшифровка...");
             using var processor = factory.CreateBuilder()
                 .WithLanguage("ru")
