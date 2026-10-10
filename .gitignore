@@ -9,7 +9,7 @@ ggml-*.bin
 ggml-*.gguf
 whisper-*.bin
 
-# FFmpeg и бинарники
+# Нейросетевые модели не идут в репозиторий
 ffmpeg.exe
 ffprobe.exe
 ffplay.exe
@@ -40,6 +40,8 @@ obj/
 *.mp4
 *.wav
 *.m4a
+# Все рабочие файлы не идут в репозиторий
+
 *.flac
 *.ogg
 *.webm
@@ -47,11 +49,13 @@ obj/
 *.avi
 *.mov
 
+# Пакеты нугент не идут в репозиторий
 
 *.nupkg
 packages/
 .nuget/
 
+# Различные мета данные
 
 Thumbs.db
 Desktop.ini
